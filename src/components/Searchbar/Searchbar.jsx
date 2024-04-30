@@ -66,24 +66,26 @@ export default function Searchbar({ onSubmit }) {
     onSubmit(searchTerm);
   };
 
-  const handleChange = e => {
-    setSearchTerm(e.target.value);
-  };
-
   return (
-    <SearchForm onSubmit={handleSubmit}>
-      <SearchFormButton type="submit">
-        <SearchFormButtonLabel>Search</SearchFormButtonLabel>
-      </SearchFormButton>
+    <div>
+      <header className="Searchbar">
+        <SearchForm className="SearchForm" onSubmit={handleSubmit}>
+          <SearchFormButton type="submit" className="button">
+            <SearchFormButtonLabel className="button-label">
+              Search
+            </SearchFormButtonLabel>
+          </SearchFormButton>
 
-      <SearchFormInput
-        type="text"
-        autoComplete="off"
-        autoFocus
-        placeholder="Search images and photos"
-        value={searchTerm}
-        onChange={handleChange}
-      />
-    </SearchForm>
+          <SearchFormInput
+            className="input"
+            type="text"
+            autoComplete="off"
+            autoFocus
+            placeholder="Search images and photos"
+            onChange={e => setSearchTerm(e)}
+          />
+        </SearchForm>
+      </header>
+    </div>
   );
 }

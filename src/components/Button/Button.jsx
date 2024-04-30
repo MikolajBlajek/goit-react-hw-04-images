@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-const StyledButton = styled.button`
+const ButtonLoadMore = styled.button`
   padding: 8px 16px;
   border-radius: 2px;
   background-color: #3f51b5;
@@ -22,5 +22,5 @@ const StyledButton = styled.button`
 `;
 
 export default function Button({ onClick }) {
-  return <StyledButton onClick={onClick}>Load more</StyledButton>;
+  return <ButtonLoadMore onClick={onClick}>Load more</ButtonLoadMore>;
 }

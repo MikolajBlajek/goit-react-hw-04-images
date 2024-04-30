@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import Searchbar from './Searchbar/Searchbar';
 import ImageGallery from './ImageGallery/ImageGallery';
+
 import Button from './Button/Button';
 import Loader from './Loader/Loader';
 import Modal from './Modal/Modal';
@@ -13,7 +14,6 @@ const AppWrapper = styled.div`
   grid-gap: 16px;
   padding-bottom: 24px;
 `;
-
 const SearchbarWrapper = styled.div`
   top: 0;
   left: 0;
@@ -35,7 +35,7 @@ const SearchbarWrapper = styled.div`
 
 const apiKey = '42631072-6b0d19ed7a3e888324b209d49';
 
-const App = () => {
+export function App() {
   const [searchTerm, setSearchTerm] = useState('');
   const [images, setImages] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
@@ -55,7 +55,8 @@ const App = () => {
     setIsLoading(true);
     try {
       const res = await axios.get(newUrl);
-      setImages(res.data.hits);
+      setImages([...images, ...res.data.hits]);
+      console.log(res);
     } catch (error) {
       console.error('Error fetching images:', error);
     } finally {
@@ -66,6 +67,7 @@ const App = () => {
   const handleInputChange = e => {
     setSearchTerm(e.target.value);
     setCurrentPage(1);
+    setImages([]);
   };
 
   const eventListener = function (event) {
@@ -90,6 +92,7 @@ const App = () => {
 
   const openModal = imageURL => {
     setSelectedImage(imageURL);
+    console.log(imageURL);
   };
 
   const closeModal = () => {
@@ -105,13 +108,17 @@ const App = () => {
         {searchTerm && (
           <>
             <ImageGallery images={images} onClick={openModal} />
-            {isLoading ? <Loader /> : <Button onClick={loadMore}>Load More</Button>}
+            {isLoading ? (
+              <Loader />
+            ) : (
+              <Button onClick={loadMore}>Load More</Button>
+            )}
           </>
         )}
-        {selectedImage && <Modal imageURL={selectedImage} onClose={closeModal} />}
+        {selectedImage && (
+          <Modal imageURL={selectedImage} onClose={closeModal} />
+        )}
       </AppWrapper>
     </div>
   );
-};
-
-export default App;
+}

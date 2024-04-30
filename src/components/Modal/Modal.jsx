@@ -18,18 +18,11 @@ const ModalWindow = styled.div`
   max-height: calc(100vh - 24px);
 `;
 
-const ModalImage = styled.img`
-  max-width: 100%;
-  max-height: 100%;
-  display: block;
-  margin: 0 auto;
-`;
-
 export default function Modal({ imageURL, onClose }) {
   return (
     <Overlay className="overlay" onClick={onClose}>
       <ModalWindow className="modal">
-        <ModalImage src={imageURL} alt="Full Size" />
+        <img src={imageURL} alt="Full Size" />
       </ModalWindow>
     </Overlay>
   );

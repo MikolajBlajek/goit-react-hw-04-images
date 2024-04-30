@@ -14,7 +14,6 @@ const ImageGalleryWrapper = styled.ul`
   margin-left: auto;
   margin-right: auto;
 `;
-
 export default function ImageGallery({ images, onClick }) {
   return (
     <ImageGalleryWrapper>
